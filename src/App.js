@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import A from "./A";
+import B from "./B";
+import { useState } from "react";
+import Getusers from "./users";
+import C from "./c";
+import D from "./D";
 
 function App() {
+  // const [val, setval] = useState(0);
+  // const data = (valueA) => {
+  //   setval(valueA);
+  // };
+  const [users, setusers] = useState([]);
+  const showusers = (catchusers) => {
+    setusers(catchusers);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <A data={data} />
+      <B val={val} /> */}
+      <Getusers showusers={showusers} />
+      <C users={users} />
+      <D />
     </div>
   );
 }
