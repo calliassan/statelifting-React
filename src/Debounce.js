@@ -1,8 +1,10 @@
+import { debounce } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const Debounce = () => {
   const [val, setval] = useState("");
   const [data, setdata] = useState([]);
+  const [timerid, settimerid] = useState(0);
   const fetchdata = async () => {
     try {
       let res = {};
@@ -21,16 +23,32 @@ const Debounce = () => {
       console.error(err);
     }
   };
-  const handlechange = (e) => {
-    setval(e.target.value);
+
+  const debouncefn = (fn, delay) => {
+    return function (...args) {
+      if (timerid) {
+        clearTimeout(timerid);
+      }
+      const newtimerid = setTimeout(() => {
+        console.log(fn, delay);
+        fn(...args);
+      }, delay);
+      console.log({ timerid, newtimerid });
+      settimerid(newtimerid);
+    };
   };
+  const handlechange = debouncefn((e) => {
+    console.log(e.target.value);
+    setval(e.target.value);
+  }, 1000);
+
   useEffect(() => {
     fetchdata();
   }, [val]);
   console.log(data);
   return (
     <div>
-      <input value={val} onChange={handlechange} placeholder="search" />
+      <input onChange={handlechange} placeholder="search" />
       <div>
         {data.length
           ? data.map((item) => <p key={item.id}>{item.title}</p>)
