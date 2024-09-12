@@ -6,24 +6,29 @@ import { useState } from "react";
 import Getusers from "./users";
 import C from "./c";
 import D from "./D";
+import Debounce from "./Debounce";
 
 function App() {
   // const [val, setval] = useState(0);
   // const data = (valueA) => {
   //   setval(valueA);
   // };
-  const [users, setusers] = useState([]);
-  const showusers = (catchusers) => {
-    setusers(catchusers);
-  };
+  // *********lifting state********
+  // const [users, setusers] = useState([]);
+  // const showusers = (catchusers) => {
+  //   setusers(catchusers);
+  // };
+  // ***********Debouncing*********
 
   return (
     <div className="App">
       {/* <A data={data} />
       <B val={val} /> */}
-      <Getusers showusers={showusers} />
-      <C users={users} />
-      <D />
+      {/* *********Users*************** */}
+      {/* <Getusers showusers={showusers} />
+      <C users={users} /> */}
+      {/* ********Debouncing************* */}
+      <Debounce />
     </div>
   );
 }

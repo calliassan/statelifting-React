@@ -1,13 +1,20 @@
 import { useEffect } from "react";
 
-const Getusers = async ({ showusers }) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
-  const gotusers = await res.json();
-  showusers(gotusers);
+const Getusers = ({ showusers }) => {
+  const fetchdata = async () => {
+    try {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+      const gotusers = await res.json();
+      console.log(gotusers);
+      showusers(gotusers.name);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
-    Getusers();
+    fetchdata();
   }, []);
 
-  return <div></div>;
+  return <div>Users here</div>;
 };
 export default Getusers;
